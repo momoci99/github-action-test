@@ -7,10 +7,13 @@ on:
 jobs:
   create_pr:
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.head_commit.message, 'SOFTWARE VERSION UPDATED') }}
+    # if: ${{ contains(github.event.head_commit.message, 'SOFTWARE VERSION UPDATED') }}
     steps:
-      - name: Checkout master
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          ref: master
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.3
@@ -18,6 +21,7 @@ jobs:
           token: ${{ secrets.ACTION_TOKEN }}
           title: "Merge master into develop"
           commit-message: "chore: SOFTWARE VERSION UPDATED"
-          branch: sync_master_to_develop
+          base: develop
+          head: master
           delete-branch: true
           body: "Automatically created pull request to merge changes from the master branch into the develop branch."
