@@ -21,5 +21,5 @@ jobs:
           token: ${{ secrets.ACTION_TOKEN }}
           title: "Merge master into develop"
           base: develop
-          # head: master
+          head: master
           body: "Automatically created pull request to merge changes from the master branch into the develop branch."
