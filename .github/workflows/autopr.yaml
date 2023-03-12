@@ -1,8 +1,7 @@
 name: Create Pull Request on Version Update
 on:
   push:
-    branches:
-      - master
+    branches: ["master"]
 
 jobs:
   create_pr:
