@@ -20,7 +20,6 @@ jobs:
         with:
           token: ${{ secrets.ACTION_TOKEN }}
           title: "Merge master into develop"
-          commit-message: "chore: SOFTWARE VERSION UPDATED"
           base: develop
           head: master
           delete-branch: true
