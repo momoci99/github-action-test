@@ -14,7 +14,8 @@ jobs:
           ref: master
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3.7.0
+        uses: peter-evans/create-pull-request@v4.2.3
+
         with:
           title: "Merge master into develop"
           commit-message: "chore: SOFTWARE VERSION UPDATED"
