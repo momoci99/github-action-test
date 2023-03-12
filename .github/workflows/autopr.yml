@@ -9,15 +9,28 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.head_commit.message, 'SOFTWARE VERSION UPDATED') }}
     steps:
-      - name: Checkout master
+      - name: Checkout master branch
         uses: actions/checkout@v3
+        with:
+          ref: master
+
+      - name: Checkout develop branch
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: Merge changes from master
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git merge origin/master --no-commit --no-ff
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.3
         with:
           token: ${{ secrets.ACTION_TOKEN }}
-          title: "Merge master into develop"
-          commit-message: "chore: SOFTWARE VERSION UPDATED"
-          branch: sync_master_to_develop
-          delete-branch: true
+          title: "sync master into develop"
+          base: develop
+          commit-message: "Merge master into develop"
           body: "Automatically created pull request to merge changes from the master branch into the develop branch."
