@@ -22,5 +22,4 @@ jobs:
           title: "Merge master into develop"
           base: develop
           head: master
-          delete-branch: true
           body: "Automatically created pull request to merge changes from the master branch into the develop branch."
